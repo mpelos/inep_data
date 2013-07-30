@@ -9,10 +9,8 @@ if __name__ == "__main__":
     else:
         with open(sys.argv[1], "r") as file:
             parser = EnemParser()
-            counter = 0
 
             for line in file:
-                counter += 1
                 data = parser.parse(line)
 
                 if data["scores"]["mathematics"]:
@@ -45,5 +43,3 @@ if __name__ == "__main__":
                         school.state_code = data["state_id"]
                         school.scores[scores_range] += 1
                         school.save()
-
-                if not counter % 1000: print counter
