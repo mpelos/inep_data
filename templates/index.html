@@ -18,6 +18,15 @@
   </div>
 
   <div class="container">
+    <p class="lead">
+      Procure por uma escola
+    </p>
+
+    <select name="school_id">
+      {% for school in schools %}
+        <option value="{{school.code}}">{{school.name}}</option>
+      {% endfor %}
+    </select>
   </div>
 </body>
 
