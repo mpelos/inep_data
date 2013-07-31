@@ -1,5 +1,5 @@
 import unittest
-from enem_parser import EnemParser
+from ..enem_parser import EnemParser
 
 class EnemParserTest(unittest.TestCase):
     def setUp(self):
