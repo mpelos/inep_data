@@ -3,11 +3,11 @@ var drawHistogram = function(school, city) {
     chart: {
       type: 'line',
       marginRight: 130,
-      marginBottom: 25
+      marginBottom: 80
     },
 
     title: {
-      text: 'Histograma de' + school.name,
+      text: 'HISTOGRAMA DE ' + school.name + " (" + city.name + ")",
       x: -20 //center
     },
 
@@ -21,13 +21,18 @@ var drawHistogram = function(school, city) {
         '500-599', '600-699', '700-799', '800-899', '900-1000']
     },
 
+    yAxis: {
+      title: {
+        text: ''
+      }
+    },
+
+    tooltip: {
+      valueSuffix: '%'
+    },
+
     legend: {
-      layout: 'vertical',
-      align: 'right',
-      verticalAlign: 'top',
-      x: -10,
-      y: 100,
-      borderWidth: 0
+      y: 0
     },
 
     series: [{
