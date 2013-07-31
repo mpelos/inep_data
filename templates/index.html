@@ -16,7 +16,9 @@
   <script type="text/javascript" src="static/select2/select2.min.js"></script>
   <script type="text/javascript" src="static/select2/select2_locale_pt-BR.js"></script>
   <script type="text/javascript" src="static/js/highcharts.js"></script>
+
   <script type="text/javascript" src="static/js/histogram.js"></script>
+  <script type="text/javascript" src="static/js/application.js"></script>
 </head>
 
 <body>
@@ -29,12 +31,7 @@
       Procure por uma escola
     </p>
 
-    <select name="school_id" class="schools">
-      {% for school in schools %}
-        <option value="{{school.code}}">{{school.name}}</option>
-      {% endfor %}
-    </select>
-
+    <input type="hidden" class="schools" />
     <div class="histogram"></div>
   </div>
 </body>

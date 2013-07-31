@@ -44,13 +44,3 @@ var drawHistogram = function(school, city) {
     }]
   });
 };
-
-jQuery(function($) {
-  $("select.schools").change(function() {
-    var code = this.value;
-
-    $.getJSON("/schools/" + code, function(data) {
-      drawHistogram(data.school, data.city);
-    });
-  });
-});
