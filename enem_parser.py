@@ -18,8 +18,7 @@ class EnemParser(object):
     def _get_data(self, string, position, length):
         data = string[position:position + length].strip()
 
-        if data == ".":
-            data = ""
+        if data == ".": data = ""
 
         try:
             data = int(float(data))
