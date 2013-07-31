@@ -14,9 +14,8 @@ if __name__ == "__main__":
                 data = parser.parse(line)
 
                 if data["scores"]["mathematics"]:
-                    scores_range = data["scores"]["mathematics"] // 50
-                    if scores_range == 20: scores_range -= 1
-
+                    scores_range = data["scores"]["mathematics"] // 100
+                    if scores_range == 10: scores_range -= 1
 
                     if data["state_id"]:
                         state = State.objects(code = data["state_id"]).first() or \
