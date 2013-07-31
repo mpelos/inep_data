@@ -8,6 +8,23 @@ def index():
     schools = School.objects.where("this.name != null").order_by("name")
     return render_template('index.html', schools = schools)
 
+@app.route("/schools")
+def school_list():
+    if request.args.get("name"):
+        schools = School.objects(name__contains = request.args.get("name").upper())
+    else:
+        schools = School.objects
+
+    json = []
+
+    for school in list(schools):
+        json.append({
+            "id": school.code,
+            "text": school.name
+        })
+
+    return jsonify({ "schools": json })
+
 @app.route("/schools/<int:code>")
 def school_show(code):
     try:
