@@ -1,5 +1,5 @@
 from flask import Flask, render_template, jsonify, request
-from models import School, City
+from models import School, City, State
 
 app = Flask(__name__)
 
@@ -18,9 +18,12 @@ def school_list():
     json = []
 
     for school in list(schools):
+        city = school.city.name if school.city else ""
+        state = school.state.acronym if school.state else ""
+
         json.append({
             "id": school.code,
-            "text": school.name
+            "text": "%s (%s / %s)" % (school.name, city, state)
         })
 
     return jsonify({ "schools": json })
