@@ -15,9 +15,6 @@ class SchoolDataImporter(object):
 
                 if not school: continue
 
-                school.name = school_name
-                school.save()
-
                 state = State.objects(code = state_id).first()
 
                 if not state:
@@ -33,6 +30,12 @@ class SchoolDataImporter(object):
                     city = City(code = city_id)
                     city.state_code = state_id
                     city.name = city_name
+                    city.state = state
 
                 city.scores = [x + y for x, y in zip(city.scores, school.scores)]
                 city.save()
+
+                school.name = school_name
+                school.city = city
+                school.state = state
+                school.save()
