@@ -1,6 +1,7 @@
+import os
 from mongoengine import *
 
-connect("inep_data_development")
+connect("inep_data_development", host = os.environ.get('MONGOHQ_URL', 'localhost'))
 
 class School(Document):
     code = IntField(required=True, unique=True)
