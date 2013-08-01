@@ -1,1 +1,1 @@
-python -m unittest discover -s inep_data/tests
+python -m unittest discover -s inep_data.tests
