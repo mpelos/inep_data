@@ -29,3 +29,8 @@ Como o arquivo de dados do ENEM não possui o nome das escolas, é usado um arqu
 * 3° coluna: Nome do município
 * 4° coluna: Código da escola
 * 5° coluna: Nome da escola
+
+Inicialização do Servidor Web
+-----------------------------
+
+`python inep_data.py`
