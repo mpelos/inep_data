@@ -16,4 +16,4 @@ if __name__ == "__main__":
         parser.error("File not found")
 
     importer = EnemSchoolImporter(args[0])
-    importer.parallel_import(workers = options.workers or 2)
+    importer.import_data(number_of_workers = options.workers or 2)
