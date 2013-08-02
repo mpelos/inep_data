@@ -32,21 +32,25 @@ def school_list():
 def school_show(code):
     try:
         school = School.objects.get(code = code)
-        city = City.objects.get(code = school.city_code)
     except:
         return "Not Found", 404
+
+    school_scores = [score["value"] for score in school.scores]
+    relative_school_scores = [(n * 100) / sum(school_scores) for n in school_scores]
+    city_scores = [score["value"] for score in school.city.scores]
+    relative_city_scores = [(n * 100) / sum(city_scores) for n in city_scores]
 
     json = {
         "school": {
             "name": school.name,
-            "scores": school.scores,
-            "relative_scores": [(n * 100) / sum(school.scores) for n in school.scores]
+            "scores": school_scores,
+            "relative_scores": relative_school_scores
         },
 
         "city": {
-            "name": city.name,
-            "scores": city.scores,
-            "relative_scores": [(n * 100) / sum(city.scores) for n in city.scores]
+            "name": school.city.name,
+            "scores": city_scores,
+            "relative_scores": relative_city_scores
         }
     }
 

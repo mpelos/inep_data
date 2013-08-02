@@ -1,25 +1,28 @@
 import os
+import yaml
 from mongoengine import *
 
 connect("inep_data_development", host = os.environ.get('MONGOHQ_URL', 'localhost'))
 
+with open("config.yml") as config:
+    scores_ranges = yaml.load(config)["scores_ranges"]
+
+scores = [{ "range": r, "value": 0 } for r in scores_ranges]
+
 class State(Document):
     code = IntField(required=True, unique=True)
     acronym = StringField();
-    scores = ListField(default = [0 for n in xrange(0,20)])
+    scores = ListField(default = scores)
 
 class City(Document):
     code = IntField(required=True, unique=True)
-    state_code = IntField()
     state = ReferenceField(State)
     name = StringField()
-    scores = ListField(default = [0 for n in xrange(0,20)])
+    scores = ListField(default = scores)
 
 class School(Document):
     code = IntField(required=True, unique=True)
-    city_code = IntField()
     city = ReferenceField(City)
-    state_code = IntField()
     state = ReferenceField(State)
     name = StringField()
-    scores = ListField(default = [0 for n in xrange(0,20)])
+    scores = ListField(default = scores)

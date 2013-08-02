@@ -5,6 +5,9 @@ class SchoolDataImporter(object):
         self.file_path = file_path
 
     def import_data(self):
+        with open("config.yml") as config:
+            scores_ranges = yaml.load(config)["scores_ranges"]
+
         with open(self.file_path) as file:
             for line in file:
                 state_acronymn, schools_city_code, city_name, school_id, school_name = line.split(",")
@@ -21,7 +24,8 @@ class SchoolDataImporter(object):
                     state = State(code = state_id)
                     state.acronym = state_acronymn
 
-                state.scores = [x + y for x, y in zip(state.scores, school.scores)]
+                for state_score, school_score in zip(state.scores, school.scores):
+                    state_score["value"] += school_score["value"]
                 state.save()
 
                 city = City.objects(code = city_id).first()
@@ -32,7 +36,8 @@ class SchoolDataImporter(object):
                     city.name = city_name
                     city.state = state
 
-                city.scores = [x + y for x, y in zip(city.scores, school.scores)]
+                for city_score, school_score in zip(city.scores, school.scores):
+                    city_score["value"] += school_score["value"]
                 city.save()
 
                 school.name = school_name
