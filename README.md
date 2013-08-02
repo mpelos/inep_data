@@ -15,12 +15,12 @@ Instalação
 Importação dos Dados
 --------------------
 
-# Dados do ENEM
+### Dados do ENEM
 `python import_enem_data.py <nome_do_arquivo.txt> --workers 2`
 
 Visando aumentar a performance da importação dos dados a opção `--workers` cria a quantidade estipulada de processos.
 
-# Dados da Escola
+### Dados da Escola
 `python import_school_data.py <nome_do_arquivo.csv>`
 
 Como o arquivo de dados do ENEM não possui o nome das escolas, é usado um arquivo CSV com os seguintes dados:
