@@ -1,7 +1,8 @@
+import os
+import yaml
 from multiprocessing import Process, Queue
 from pymongo import MongoClient
 from mongoengine import NotUniqueError
-import yaml
 
 from ..enem_parser import EnemParser
 from ..models import School
@@ -11,7 +12,10 @@ class EnemSchoolImporter(object):
         self.file_path = file_path
 
     def import_data(self, number_of_workers = 2):
-        db = MongoClient()["inep_data_development"]
+        if os.environ.get("MONGOHQ_URL"):
+            db = MongoClient(os.environ.get("MONGOHQ_URL"))
+        else:
+            db = MongoClient()["inep_data_development"]
 
         with open(self.file_path) as file:
             queue = Queue(number_of_workers)
